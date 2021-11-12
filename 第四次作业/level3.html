@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //1.创建需要被拷贝的对象
+        //2.创建一个新的对象来进行拷贝
+        //3.定义函数进行深拷贝
+        //4.判断属性类型
+        //5.改变原对象内属性并打印出新对象进行检验
+        let person = {
+            name: '苏轼',
+            age: 64,
+            gender: '男',
+            nickname: ['苏东坡', '苏仙'],
+            address: {
+                city: '四川'
+            },
+
+        }
+        let person1 = {};
+        function Deepcopy(person1, person) {
+            for (let key in person) {
+                let m = person[key]
+                if (m instanceof Array) {
+                    person1[key] = []
+                    Deepcopy(person1[key], m)
+                } else if (m instanceof Object) {
+                    person1[key] = {}
+                    Deepcopy(person1[key], m)
+                } else {
+                    person1[key] = m;
+                }
+            }
+        }
+        Deepcopy(person1, person);
+        person.name = '李白';
+        person.nickname.push('苏玉局');
+        console.log(person1)
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
