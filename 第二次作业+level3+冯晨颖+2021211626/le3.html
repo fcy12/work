@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet"
+        href="https://at.alicdn.com/t/font_2900627_saqjpcaxxg.css?spm=a313x.7781069.1998910419.39&file=font_2900627_saqjpcaxxg.css">
+</head>
+<style>
+    body {
+        background-color: darkgray;
+
+    }
+
+    .a {
+        width: 300px;
+        height: 50px;
+        background-color: white;
+        position: relative;
+        top: 300px;
+        left: 800px;
+        display: table-cell;
+        vertical-align: middle;
+        border-radius: 10px;
+    }
+
+    .a span {
+        padding-left: 50px;
+        margin-top: 20px;
+    }
+
+    .b {
+        width: 200px;
+        height: 55px;
+        text-align: center;
+        background-color: rgb(77, 77, 73);
+        position: relative;
+        left: 760px;
+        top: 200px;
+        border-radius: 10px;
+        visibility: hidden;
+
+    }
+
+    a {
+        color: red;
+        font-size: 20px;
+    }
+
+    .bb {
+        position: absolute;
+        width: 0;
+        height: 0;
+        line-height: 0;
+        font-size: 0;
+        border: 15px solid transparent;
+        border-top-color: rgb(77, 77, 73);
+        top: 50px;
+        left: 80px;
+    }
+
+    .a:hover+.b {
+        visibility: visible;
+    }
+</style>
+
+<body>
+    <div class="a">
+
+        <span><a href="#" class="iconfont icon-info-o-copy" style="text-decoration: none;"></a> Hover over
+            the"i"!</span>
+    </div>
+    <div class="b"><span class="bb"></span>Sample text for your tooltip!</div>
+</body>
+
+</html>
