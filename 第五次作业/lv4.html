@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .liuyan {
+            width: 800px;
+            height: 500px;
+            border-style: solid;
+            border-width: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div class="title">留言板</div>
+        <div class="liuyan" id="showliuyan"></div>
+        <div>
+            <input type="text" id="imputcontent" placeholder="请输入内容"><button id="post" onclick="ly()">发送</button>
+            <select id="selector" onselect="changeColor()">
+                <option value="one">黑色 </option>
+                <option value="two">红色 </option>
+
+            </select>
+        </div>
+    </div>
+    <script>
+        let sly = document.getElementById("showliuyan");
+        let ipt = document.getElementById("imputcontent");
+        let select = document.getElementById("selector").value;
+        function ly() {
+            if (ipt.value) {
+                let li = document.createElement('li');
+                li.innerHTML = ipt.value + "<a href='#'>删除</a>";
+                sly.insertBefore(li, sly.children[0]);
+            }
+            let a = document.querySelectorAll('a');
+            for (let i = 0; i < a.length; i++) {
+                a[i].onclick = function () {
+                    sly.removeChild(this.parentNode)
+                }
+            }
+
+        }
+        function changeColor() {
+            if (select == "two") {
+                sly.style.color = "red";
+            }
+            else sly.style.color = "black";
+        }
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .liuyan {
+            width: 800px;
+            height: 500px;
+            border-style: solid;
+            border-width: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div class="title">留言板</div>
+        <div class="liuyan" id="showliuyan"></div>
+        <div><input type="text" id="imputcontent" placeholder="请输入内容"><button id="post" onclick="ly()">发送</button></div>
+    </div>
+    <script>
+        let sly = document.getElementById("showliuyan");
+        let ipt = document.getElementById("imputcontent");
+        function ly() {
+            if (ipt.value) {
+                let li = document.createElement("li");
+                li.innerHTML = ipt.value;
+                sly.appendChild(li);
+            }
+        }
+    </script>
+</body>
+
+</html>
