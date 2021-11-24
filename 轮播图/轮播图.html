@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="chn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="wyy.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: gray;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        .frame {
+            width: 985px;
+            height: 285px;
+            position: relative;
+            left: 50%;
+            top: 0;
+            transform: translate(-50%, 50%);
+        }
+
+        .imgs {
+            width: 730px;
+            height: 284px;
+            position: relative;
+            left: 50%;
+            top: 0;
+            transform: translate(-50%, 0%);
+        }
+
+        .imgs>li {
+            position: absolute;
+            width: 730px;
+            transition: 0.5s;
+        }
+
+        .frame .left {
+            position: absolute;
+            left: 30px;
+            top: 58%;
+            width: 40px;
+            height: 40px;
+            font-size: 30px;
+            line-height: 38px;
+            text-align: center;
+            border-radius: 20px;
+            color: white;
+            background-color: black;
+            opacity: .3;
+            z-index: 999;
+        }
+
+        .frame .right {
+            position: absolute;
+            right: 30px;
+            top: 58%;
+            width: 40px;
+            height: 40px;
+            font-size: 30px;
+            line-height: 38px;
+            text-align: center;
+            border-radius: 20px;
+            color: white;
+            background-color: black;
+            opacity: .3;
+            z-index: 999;
+
+        }
+
+        .img1 {
+            transform: translateX(-150px)scale(0.85);
+            z-index: 1;
+        }
+
+        .img2 {
+            z-index: 2;
+        }
+
+        .img3 {
+            transform: translateX(150px)scale(0.85);
+            z-index: 1;
+        }
+
+        .img4 {
+            transform: scale(0.85);
+        }
+
+        .img5 {
+            transform: scale(0.85);
+        }
+
+        .img6 {
+            transform: scale(0.85);
+        }
+
+        img {
+            width: 100%;
+            border-radius: 10px;
+
+        }
+
+
+        .left:hover {
+            opacity: .7;
+        }
+
+        .right:hover {
+            opacity: .7;
+        }
+
+        .left1 {
+            width: 100px;
+            height: 255px;
+            position: absolute;
+            left: 0;
+            bottom: 14px;
+        }
+
+        .right1 {
+            width: 100px;
+            height: 255px;
+            position: absolute;
+            right: 0;
+            bottom: 30px;
+        }
+
+        .litcircle {
+            position: absolute;
+            bottom: -169px;
+            left: 48%;
+            margin-left: -81px;
+            z-index: 777;
+        }
+
+        .litcircle li {
+            float: left;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin: 0 6px 0;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .litcircle .change {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="frame">
+        <a href="javascript:;" class="left">&lt</a>
+        <a href="javascript:;" class="right">&gt</a>
+
+        <ul class="imgs">
+            <li class="img1">
+                <img src="images/1.jpg">
+            </li>
+            <li class="img2">
+                <img src="images/2.jpg">
+            </li>
+            <li class="img3">
+                <img src="images/3.jpg">
+            </li>
+            <li class="img4">
+                <img src="images/4.jpg" class="rose">
+            </li>
+            <li class="img5">
+                <img src="images/5.jpg">
+            </li>
+            <li class="img6">
+                <img src="images/6.jpg">
+            </li>
+        </ul>
+        <ul class="litcircle"></ul>
+        <div class="right1"></div>
+        <div class="left1"></div>
+    </div>
+    <script>
+        window.addEventListener('load', function () {
+            let leftbtn = document.querySelector('.left');
+            let rightbtn = document.querySelector('.right');
+            let frame = document.querySelector('.frame');
+            let imgs = frame.querySelector('.imgs');
+            let imgm = imgs.querySelectorAll('li');
+            let changetime = setInterval(function () {
+                rightf();
+            }, 1500);
+            frame.addEventListener('mouseover', function () {
+                leftbtn.style.display = 'block';
+                rightbtn.style.display = 'block';
+                clearInterval(changetime);
+                changetime = null;
+            })
+            frame.addEventListener('mouseout', function () {
+                leftbtn.style.display = 'none';
+                rightbtn.style.display = 'none';
+                clearInterval(changetime);
+                changetime = setInterval(function () {
+                    rightf();
+                }, 1500)
+            })
+            let litcircle = frame.querySelector('.litcircle');
+            for (let i = 0; i < imgs.children.length; i++) {
+                let li = document.createElement('li');
+                litcircle.appendChild(li);
+                li.setAttribute('index', i);
+                li.addEventListener('click', colors);
+                li.addEventListener('mouseenter', jump);
+            }
+            litcircle.children[1].className = 'change';
+            function colors() {
+                for (let i = 0; i < litcircle.children.length; i++) {
+                    litcircle.children[i].className = '';
+                }
+                let index = this.getAttribute('index');
+                litcircle.children[index].className = 'change';
+            }
+            function jump() {
+                let index = this.getAttribute('index');
+                let now = num.indexOf('img2');
+                let dif = Math.max(index, now) - Math.min(index, now);
+                if (index > now) {
+                    while (dif--) {
+                        rightf();
+                    }
+                } else {
+                    while (dif--) {
+                        leftf();
+                    }
+                }
+            }
+            let j = 1;
+            function colort() {
+                for (let i = 0; i < litcircle.children.length; i++) {
+                    litcircle.children[i].className = '';
+                }
+                if (j >= 6) {
+                    j = 0;
+                } else if (j < 0) {
+                    j = 5;
+                }
+                litcircle.children[j].className = 'change';
+            }
+            let num = ['img1', 'img2', 'img3', 'img4', 'img5', 'img6'];
+            rightbtn.addEventListener('click', rightf);
+            function rightf() {
+                num.unshift(num[5]);
+                num.pop();
+                for (let i = 0; i < num.length; i++) {
+                    imgm[i].setAttribute('class', num[i]);
+                }
+                j++;
+                colort();
+            }
+            leftbtn.addEventListener('click', leftf)
+            function leftf() {
+                num.push(num[0]);
+                num.shift();
+                for (let i = 0; i < num.length; i++) {
+                    imgm[i].setAttribute('class', num[i]);
+                }
+                j--;
+                colort();
+            }
+            let rights = document.querySelector('.rights');
+            rights.addEventListener('click', function () {
+                rightf();
+            })
+            let lefts = document.querySelector('.lefts');
+            lefts.addEventListener('click', function () {
+                leftf();
+            })
+        })
+
+    </script>
+</body>
+
+
+</html>
