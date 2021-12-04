@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let url = 'https://jsonplaceholder.typicode.com/todos/';
+        let date = {
+            "userId": 2,
+            "id": 4,
+            "title": "delectus aut autem",
+            "completed": false
+        }
+        async function change() {
+            let response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({ date }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+
+            })
+                .then(response => response.json())
+                .then(date => console.log(date));
+        };
+        change();
+    </script>
+</body>
+
+</html>

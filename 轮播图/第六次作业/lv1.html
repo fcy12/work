@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: burlywood;
+            position: relative;
+            left: 0;
+        }
+
+        #div2 {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: cadetblue;
+            position: relative;
+            left: 0;
+        }
+
+        #div3 {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: cornflowerblue;
+            position: relative;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div1"></div>
+    <div id="div2"></div>
+    <div id="div3"></div>
+    <script>
+        //创建三个圆各自的运动函数
+        function move1() {
+            let div1 = document.getElementById('div1');
+            let timer = setInterval(function () {
+                if (div1.offsetLeft >= 400) {
+                    clearInterval(timer);
+                }
+                div1.style.left = div1.offsetLeft + 1 + 'px';
+            }, 50);
+        }
+        function move2() {
+            let div2 = document.getElementById('div2');
+            let timer = setInterval(function () {
+                if (div2.offsetLeft >= 400) {
+                    clearInterval(timer);
+                }
+                div2.style.left = div2.offsetLeft + 1 + 'px';
+            }, 50);
+        }
+        function move3() {
+            let div3 = document.getElementById('div3');
+            let timer = setInterval(function () {
+                if (div3.offsetLeft >= 400) {
+                    clearInterval(timer);
+                }
+                div3.style.left = div3.offsetLeft + 1 + 'px';
+            }, 50);
+        }
+        //1.setTimeout定时器嵌套 
+        setTimeout(function () {
+            move1();
+            setTimeout(function () {
+                move2();
+                setTimeout(function () {
+                    move3();
+                }, 2500);
+            }, 2500);
+        }, 0);
+
+
+        //2.Promise链式回调
+        new Promise((resolve, reject) => {
+            move1();
+            setTimeout(resolve, 2500);
+        })
+            .then(function () {
+                move2();
+                return new Promise((resolve, reject) => {
+                    setTimeout(resolve, 2500);
+                })
+
+            })
+            .then(function () {
+                move3();
+            });
+
+
+        //3.aysnc await异步队列
+        function mov2() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(move2());
+                }, 2500);
+            })
+        }
+        function mov3() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(move3());
+                }, 2500);
+            })
+        }
+        async function move() {
+            let m1 = await move1();
+            let m2 = await mov2();
+            let m3 = await mov3();
+        };
+        move();
+
+    </script>
+</body>
+
+</html>
